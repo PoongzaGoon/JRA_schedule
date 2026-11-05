@@ -1,0 +1,349 @@
+{
+  "schemaVersion": "1.0.0",
+  "isExample": true,
+  "referenceDate": "2026-11-05",
+  "sourceUrl": "https://example.com/fictional-jra-table",
+  "notes": "UI 검토를 위한 가상 데이터입니다. 첨부 캡처의 실제 출주 정보를 전사한 자료가 아닙니다.",
+  "stallions": [
+    {
+      "id": "contrail",
+      "name": {
+        "ja": "コントレイル",
+        "ko": "콘트레일",
+        "koKind": "ai"
+      },
+      "sourceUrl": null,
+      "raceDays": [
+        {
+          "date": "2026-11-07",
+          "entries": [
+            {
+              "raceNumber": 2,
+              "venue": {
+                "ja": "東京",
+                "ko": "도쿄",
+                "koKind": "ai"
+              },
+              "raceName": {
+                "ja": "2歳未勝利",
+                "ko": "2세 미승리",
+                "koKind": "ai"
+              },
+              "surface": "dirt",
+              "distanceM": 1600,
+              "horse": {
+                "ja": "サンプルホース一",
+                "ko": "예시 호스 원",
+                "koKind": "ai"
+              },
+              "sex": "male",
+              "age": 2,
+              "jockey": {
+                "ja": "例示騎手1",
+                "ko": "예시 기수 1",
+                "koKind": "ai"
+              },
+              "weightKg": 56,
+              "review": {
+                "required": false,
+                "notes": null
+              },
+              "extras": {
+                "popularity": null,
+                "gate": null,
+                "horseNumber": null,
+                "trainer": null,
+                "finishPosition": null,
+                "previousRace": null,
+                "interval": null
+              }
+            },
+            {
+              "raceNumber": 6,
+              "venue": {
+                "ja": "京都",
+                "ko": "교토",
+                "koKind": "ai"
+              },
+              "raceName": {
+                "ja": "3歳以上1勝クラス",
+                "ko": "3세 이상 1승 클래스",
+                "koKind": "ai"
+              },
+              "surface": "turf",
+              "distanceM": 2000,
+              "horse": {
+                "ja": "サンプルホース二",
+                "ko": "예시 호스 투",
+                "koKind": "ai"
+              },
+              "sex": "female",
+              "age": 3,
+              "jockey": {
+                "ja": "例示騎手2",
+                "ko": "예시 기수 2",
+                "koKind": "ai"
+              },
+              "weightKg": 54,
+              "review": {
+                "required": false,
+                "notes": null
+              },
+              "extras": {
+                "popularity": null,
+                "gate": null,
+                "horseNumber": null,
+                "trainer": null,
+                "finishPosition": null,
+                "previousRace": null,
+                "interval": null
+              }
+            },
+            {
+              "raceNumber": 12,
+              "venue": {
+                "ja": "東京",
+                "ko": "도쿄",
+                "koKind": "ai"
+              },
+              "raceName": {
+                "ja": "2歳未勝利",
+                "ko": "2세 미승리",
+                "koKind": "ai"
+              },
+              "surface": "turf",
+              "distanceM": 2000,
+              "horse": {
+                "ja": "サンプルホース三",
+                "ko": "예시 호스 쓰리",
+                "koKind": "ai"
+              },
+              "sex": "male",
+              "age": 2,
+              "jockey": {
+                "ja": "例示騎手3",
+                "ko": "예시 기수 3",
+                "koKind": "ai"
+              },
+              "weightKg": 56,
+              "review": {
+                "required": false,
+                "notes": null
+              },
+              "extras": {
+                "popularity": null,
+                "gate": null,
+                "horseNumber": null,
+                "trainer": null,
+                "finishPosition": null,
+                "previousRace": null,
+                "interval": null
+              }
+            }
+          ]
+        },
+        {
+          "date": "2026-11-08",
+          "entries": [
+            {
+              "raceNumber": 1,
+              "venue": {
+                "ja": "東京",
+                "ko": "도쿄",
+                "koKind": "ai"
+              },
+              "raceName": {
+                "ja": "2歳未勝利",
+                "ko": "2세 미승리",
+                "koKind": "ai"
+              },
+              "surface": "dirt",
+              "distanceM": 1600,
+              "horse": {
+                "ja": "サンプルホース四",
+                "ko": "예시 호스 포",
+                "koKind": "ai"
+              },
+              "sex": "male",
+              "age": 2,
+              "jockey": {
+                "ja": "例示騎手1",
+                "ko": "예시 기수 1",
+                "koKind": "ai"
+              },
+              "weightKg": 56,
+              "review": {
+                "required": false,
+                "notes": null
+              },
+              "extras": {
+                "popularity": null,
+                "gate": null,
+                "horseNumber": null,
+                "trainer": null,
+                "finishPosition": null,
+                "previousRace": null,
+                "interval": null
+              }
+            },
+            {
+              "raceNumber": 9,
+              "venue": {
+                "ja": "京都",
+                "ko": "교토",
+                "koKind": "ai"
+              },
+              "raceName": {
+                "ja": "3歳以上1勝クラス",
+                "ko": "3세 이상 1승 클래스",
+                "koKind": "ai"
+              },
+              "surface": "turf",
+              "distanceM": 2000,
+              "horse": {
+                "ja": "サンプルホース五",
+                "ko": "예시 호스 파이브",
+                "koKind": "ai"
+              },
+              "sex": "female",
+              "age": 3,
+              "jockey": {
+                "ja": "例示騎手2",
+                "ko": "예시 기수 2",
+                "koKind": "ai"
+              },
+              "weightKg": 54,
+              "review": {
+                "required": false,
+                "notes": null
+              },
+              "extras": {
+                "popularity": null,
+                "gate": null,
+                "horseNumber": null,
+                "trainer": null,
+                "finishPosition": null,
+                "previousRace": null,
+                "interval": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kitasan-black",
+      "name": {
+        "ja": "キタサンブラック",
+        "ko": "키타산 블랙",
+        "koKind": "ai"
+      },
+      "sourceUrl": null,
+      "raceDays": [
+        {
+          "date": "2026-11-07",
+          "entries": [
+            {
+              "raceNumber": 5,
+              "venue": {
+                "ja": "京都",
+                "ko": "교토",
+                "koKind": "ai"
+              },
+              "raceName": {
+                "ja": "3歳以上1勝クラス",
+                "ko": "3세 이상 1승 클래스",
+                "koKind": "ai"
+              },
+              "surface": "turf",
+              "distanceM": 2000,
+              "horse": {
+                "ja": "デモホース",
+                "ko": "데모 호스",
+                "koKind": "ai"
+              },
+              "sex": "female",
+              "age": 3,
+              "jockey": {
+                "ja": "例示騎手2",
+                "ko": "예시 기수 2",
+                "koKind": "ai"
+              },
+              "weightKg": 54,
+              "review": {
+                "required": false,
+                "notes": null
+              },
+              "extras": {
+                "popularity": null,
+                "gate": null,
+                "horseNumber": null,
+                "trainer": null,
+                "finishPosition": null,
+                "previousRace": null,
+                "interval": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gold-ship",
+      "name": {
+        "ja": "ゴールドシップ",
+        "ko": "골드 쉽",
+        "koKind": "ai"
+      },
+      "sourceUrl": null,
+      "raceDays": [
+        {
+          "date": "2026-11-08",
+          "entries": [
+            {
+              "raceNumber": 4,
+              "venue": {
+                "ja": "東京",
+                "ko": "도쿄",
+                "koKind": "ai"
+              },
+              "raceName": {
+                "ja": "2歳未勝利",
+                "ko": "2세 미승리",
+                "koKind": "ai"
+              },
+              "surface": "dirt",
+              "distanceM": 1600,
+              "horse": {
+                "ja": "確認待ちホース",
+                "ko": "검토 대기 호스",
+                "koKind": "ai"
+              },
+              "sex": "male",
+              "age": 2,
+              "jockey": {
+                "ja": "例示騎手1",
+                "ko": "예시 기수 1",
+                "koKind": "ai"
+              },
+              "weightKg": null,
+              "review": {
+                "required": true,
+                "notes": "부담중량이 판독되지 않은 가상 사례"
+              },
+              "extras": {
+                "popularity": null,
+                "gate": null,
+                "horseNumber": null,
+                "trainer": null,
+                "finishPosition": null,
+                "previousRace": null,
+                "interval": null
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

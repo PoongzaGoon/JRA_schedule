@@ -1,0 +1,24 @@
+{
+  "name": "jra-capture-schedule",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --watch src/server.js",
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "build": "node scripts/build.js",
+    "test": "node --test --test-concurrency=1 tests/*.test.js",
+    "admin:password": "node scripts/password.js",
+    "resources": "node scripts/resources.js",
+    "test:e2e": "node tests/browser.e2e.js"
+  },
+  "dependencies": {
+    "zod": "4.3.6"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}
