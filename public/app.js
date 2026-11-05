@@ -118,7 +118,7 @@ main.addEventListener('submit', async event => {
   try {
     const result = await api('/api/admin/login', { password: document.querySelector('#password').value });
     document.querySelector('#password').value = '';
-    state.csrf = result.csrf; state.revisionId = result.revisionId; state.error = ''; await refreshHistory(); renderAdmin();
+    state.csrf = result.csrf; state.revisionId = result.revisionId; state.result = null; state.confirmed = false; state.restoringId = null; state.error = ''; await refreshHistory(); renderAdmin();
   } catch (error) { const box = document.querySelector('#login-error'); if (box) box.textContent = error.message; }
   finally { if (button.isConnected) button.disabled = false; }
 });
