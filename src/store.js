@@ -1,16 +1,14 @@
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-export class ConflictError extends Error {}
+import { storeSchema, ConflictError } from './store-schema.js';
+export { ConflictError };
 export function openStore(filename) {
   if (filename === ':memory:') throw new Error('영속 데이터베이스 경로를 설정하세요.');
   mkdirSync(dirname(resolve(filename)), { recursive: true, mode: 0o700 });
   const db = new DatabaseSync(filename);
   db.exec(`PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; PRAGMA busy_timeout=5000;
-    CREATE TABLE IF NOT EXISTS revisions(id INTEGER PRIMARY KEY, payload TEXT NOT NULL, published_at TEXT NOT NULL, kind TEXT NOT NULL, restored_from INTEGER);
-    CREATE TABLE IF NOT EXISTS publication(singleton INTEGER PRIMARY KEY CHECK(singleton=1), revision_id INTEGER NOT NULL REFERENCES revisions(id));
-    CREATE TABLE IF NOT EXISTS sessions(hash TEXT PRIMARY KEY, csrf TEXT NOT NULL, expires_at INTEGER NOT NULL);
-    CREATE TABLE IF NOT EXISTS login_limits(key TEXT PRIMARY KEY, count INTEGER NOT NULL, resets_at INTEGER NOT NULL);`);
+    ${storeSchema}`);
   const current = () => {
     const row = db.prepare('SELECT r.* FROM revisions r JOIN publication p ON p.revision_id=r.id WHERE p.singleton=1').get();
     return row ? decode(row) : null;

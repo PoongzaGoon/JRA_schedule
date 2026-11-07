@@ -13,9 +13,11 @@
     "test": "node --test --test-concurrency=1 tests/*.test.js",
     "admin:password": "node scripts/password.js",
     "resources": "node scripts/resources.js",
-    "test:e2e": "node tests/browser.e2e.js"
+    "test:e2e": "node tests/browser.e2e.js",
+    "test:e2e:remote": "node tests/browser.e2e.js --libsql"
   },
   "dependencies": {
+    "@libsql/client": "0.18.0",
     "zod": "4.6.7"
   },
   "devDependencies": {
