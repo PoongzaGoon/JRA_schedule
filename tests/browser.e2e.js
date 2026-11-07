@@ -5,9 +5,13 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createApp } from '../src/server.js';
 import { passwordHash } from '../src/auth.js';
+import { createClient } from '@libsql/client';
+import { openRemoteStore } from '../src/remote-store.js';
 const dir = await mkdtemp(join(tmpdir(), 'jra-browser-'));
 const origin = 'http://127.0.0.1:4217';
-const app = createApp({ APP_ORIGIN: origin, DATABASE_PATH: join(dir, 'test.sqlite'), ADMIN_PASSWORD_HASH: await passwordHash('browser-test-only-password-123') });
+const remote = process.argv.includes('--libsql');
+const store = remote ? openRemoteStore({}, createClient({ url: 'file:' + join(dir, 'remote.sqlite') })) : undefined;
+const app = createApp({ APP_ORIGIN: origin, DATABASE_PATH: join(dir, 'test.sqlite'), ADMIN_PASSWORD_HASH: await passwordHash('browser-test-only-password-123') }, { store });
 await new Promise(resolve => app.server.listen(4217, '127.0.0.1', resolve));
 const browser = await chromium.launch({ headless: true, executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || undefined, args: ['--no-sandbox'] });
 const errors = [];
@@ -89,5 +93,5 @@ try {
   await page.getByRole('heading', { name: '관리자 로그인', exact: true }).waitFor();
   assert.equal(await page.getByLabel('관리자 비밀번호', { exact: true }).inputValue(), '');
   assert.deepEqual(errors, []);
-  console.log('Browser QA passed: desktop/mobile, filtering, originals/extras, invalid input preservation, local capture preview, publish, restore, logout.');
+  console.log((remote ? 'libSQL ' : 'SQLite ') + 'Browser QA passed: desktop/mobile, filtering, originals/extras, invalid input preservation, local capture preview, publish, restore, logout.');
 } finally { await browser.close(); await app.close(); await rm(dir, { recursive: true, force: true }); }

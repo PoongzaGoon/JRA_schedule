@@ -1,4 +1,6 @@
-import test from 'node:test';
+import test, { describe } from 'node:test';
+import { createClient } from '@libsql/client';
+import { openRemoteStore } from '../src/remote-store.js';
 import assert from 'node:assert/strict';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -8,10 +10,12 @@ import { createApp } from '../src/server.js';
 import { example } from '../src/example.js';
 const password = 'test-only-password-Long123!';
 const hash = await passwordHash(password);
+for (const remote of [false, true]) describe(remote ? 'libSQL async API' : 'local SQLite API', () => {
 async function setup(t, overrides = {}) {
   const dir = await mkdtemp(join(tmpdir(), 'jra-capture-test-'));
   const config = { DATABASE_PATH: join(dir, 'test.db'), ADMIN_PASSWORD_HASH: hash, APP_ORIGIN: 'http://localhost:3000', ...overrides };
-  let app = createApp(config);
+  const start = () => createApp(config, remote ? { store: openRemoteStore({}, createClient({ url: 'file:' + config.DATABASE_PATH })) } : {});
+  let app = start();
   await new Promise(resolve => app.server.listen(0, '127.0.0.1', resolve));
   let base = `http://127.0.0.1:${app.server.address().port}`;
   let cookie = '', csrf = '';
@@ -21,7 +25,7 @@ async function setup(t, overrides = {}) {
   };
   const login = async () => { const r = await call('/api/admin/login', { password }); cookie = r.cookie?.split(';')[0] ?? ''; csrf = r.data.csrf ?? ''; return r; };
   t.after(async () => { await app.close(); await rm(dir, { recursive: true, force: true }); });
-  return { call, login, config, get app() { return app; }, restart: async () => { await app.close(); app = createApp(config); await new Promise(resolve => app.server.listen(0, '127.0.0.1', resolve)); base = `http://127.0.0.1:${app.server.address().port}`; } };
+  return { call, login, config, get app() { return app; }, restart: async () => { await app.close(); app = start(); await new Promise(resolve => app.server.listen(0, '127.0.0.1', resolve)); base = `http://127.0.0.1:${app.server.address().port}`; } };
 }
 test('unconfigured server exposes setup status and refuses all admin operations', async t => {
   const s = await setup(t, { ADMIN_PASSWORD_HASH: '' });
@@ -67,10 +71,10 @@ test('validation is read-only; publish is durable, restores append history, stal
 });
 test('failed transaction rolls back revision and publication pointer together', async t => {
   const s = await setup(t);
-  s.app.store.publish(example, 0);
+  await s.app.store.publish(example, 0);
   const cyclic = {}; cyclic.self = cyclic;
-  assert.throws(() => s.app.store.publish(cyclic, 1));
-  assert.equal(s.app.store.current().id, 1); assert.equal(s.app.store.history().length, 1);
+  await assert.rejects(async () => s.app.store.publish(cyclic, 1));
+  assert.equal((await s.app.store.current()).id, 1); assert.equal((await s.app.store.history()).length, 1);
 });
 test('five failed passwords are throttled and limits survive restart', async t => {
   const s = await setup(t);
@@ -82,4 +86,6 @@ test('production misconfiguration is explicit; secure origin issues Secure cooki
   assert.equal((await s.call('/api/health')).data.configured, false);
   const secure = await setup(t, { NODE_ENV: 'production', APP_ORIGIN: 'https://schedule.example.com' });
   assert.match((await secure.login()).cookie, /Secure/);
+});
+
 });
